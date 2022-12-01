@@ -8,6 +8,10 @@ use App\Models\Posty;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index','show']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -91,19 +95,22 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Posty::findOrFail($id);
+        return view('posty.zmien', compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\PostStoreRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostStoreRequest $request, $id)
     {
-        //
+        $post = Posty::findOrFail($id);
+        $post->update(request()->all());
+        return redirect()->route('posty.index')->with('message', 'Uaktalniono poprawnie');
     }
 
     /**
@@ -114,6 +121,8 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Posty::findOrFail($id);
+        $post->delete();
+        return redirect()->route('posty.index')->with('message', 'Usunięto post');
     }
 }

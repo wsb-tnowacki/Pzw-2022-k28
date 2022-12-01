@@ -24,7 +24,7 @@ class PostStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'tytul' => 'required|max:200',
+            'tytul' => 'required|max:200|min:2',
             'autor' => 'required|max:100',
             'email' => 'required|email:rfc,dns|max:100',
             'tresc' => 'required|min:5|max:256'
