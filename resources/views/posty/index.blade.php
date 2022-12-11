@@ -20,12 +20,15 @@ Lista postów
       </tr>
     </thead>
     <tbody>
-      @php $lp = 1; @endphp
+      @php 
+        //$lp = 1; 
+        $lp=$posty->firstItem();
+      @endphp
       @foreach ($posty as $post)
       <tr>
         <th scope="row">{{ $lp++ }} id:{{ $post->id }}</th>
         <td><a href="{{ route('posty.show', $post->id) }}"> {{ $post->tytul }}</a></td>
-        <td>{{ $post->autor }}</td>
+        <td>{{ $post->autor }} / {{ $post->user->name }}</td>
         <td>{{ date('j F Y',strtotime($post->created_at)) }}</td>
         @auth
         <td>
@@ -42,6 +45,7 @@ Lista postów
       @endforeach
     </tbody>
   </table>
+  {{ $posty->links() }}
   {{-- dump($posty) --}}
 @endsection
 

@@ -16,11 +16,11 @@ Szczegóły postu
     </div>
     <div class="form-group">
         <label for="autor">Autor</label>
-        <input type="text" class="form-control" id="autor" name="autor" value="{{ $post->autor }}" disabled="disabled">
+        <input type="text" class="form-control" id="autor" name="autor" value="{{ $post->autor }} / {{ $post->user->name }}" disabled="disabled">
       </div>
     <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" name="email" value="{{ $post->email }}" disabled="disabled">
+        <input type="email" class="form-control" id="email" name="email" value="{{ $post->email }}  / {{ $post->user->email }}" disabled="disabled">
     </div>
     <div class="form-group">
       <label for="tresc">Treść postu:</label>
@@ -33,6 +33,8 @@ Szczegóły postu
     @endauth
     
     </form>
+
+    {{-- dump($post) --}}
 @endsection
 @section('naglowek')
 Szczegóły postu
